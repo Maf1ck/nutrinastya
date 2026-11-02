@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { CONTACTS, LEGAL_LINKS, OWNER } from '@/config/site'
+import DevTicker from './DevTicker.vue'
 
 const year = new Date().getFullYear()
 const nav = [
@@ -12,6 +13,7 @@ const nav = [
 </script>
 
 <template lang="pug">
+DevTicker
 footer.footer
   .footer__inner
     .footer__brand

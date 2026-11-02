@@ -11,6 +11,11 @@ export const OWNER = {
   name: 'Костенко Анастасія',
 }
 
+export const DEVELOPER = {
+  telegram: 'https://t.me/zxcmaf1ck',
+  telegramHandle: '@zxcmaf1ck',
+}
+
 export const LEGAL_LINKS = [
   { to: '/privacy', label: 'Політика конфіденційності' },
   { to: '/terms', label: 'Умови використання' },
