@@ -48,7 +48,8 @@ footer.footer
   background: $green-dark;
   color: #fff;
 
-  a {
+  // звичайні посилання; кнопки (.btn) зберігають власні кольори
+  a:not(.btn) {
     color: $text-on-dark;
     text-decoration: none;
     transition: color 0.2s ease;
