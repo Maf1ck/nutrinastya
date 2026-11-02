@@ -1,0 +1,66 @@
+<script setup lang="ts">
+defineProps<{
+  title: string
+  text: string
+  featured?: boolean
+}>()
+</script>
+
+<template lang="pug">
+.service(:class="{ 'service--featured': featured }")
+  .service__badge(v-if='featured') Найпопулярніше
+  h3.service__title {{ title }}
+  p.service__text {{ text }}
+  .service__price [ЦІНА] ₴
+  a.btn(href='#contact' :class="featured ? 'btn--white' : 'btn--outline'") Обрати
+</template>
+
+<style lang="scss">
+@use '@/scss/variables' as *;
+
+.service {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 30px;
+  background: $bg;
+  border-radius: 24px;
+
+  &__title {
+    font-size: 21px;
+  }
+
+  &__text {
+    color: $text-muted;
+  }
+
+  &__price {
+    margin-top: auto;
+    font-family: $font-heading;
+    font-size: 32px;
+  }
+
+  .btn {
+    padding: 13px;
+  }
+
+  &--featured {
+    background: $green-dark;
+    color: #fff;
+
+    .service__text {
+      color: $text-on-dark;
+    }
+  }
+
+  &__badge {
+    align-self: flex-start;
+    padding: 4px 12px;
+    background: $badge-bg;
+    border-radius: $pill;
+    color: $text-heading;
+    font-size: 13px;
+    font-weight: 700;
+  }
+}
+</style>

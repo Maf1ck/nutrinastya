@@ -1,0 +1,156 @@
+@use 'variables' as *;
+
+// ---------- base ----------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: $bg;
+  color: $text;
+  font-family: $font-body;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a {
+  color: $green-link;
+
+  &:hover {
+    color: $green-link-hover;
+  }
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: $font-heading;
+  font-weight: 600;
+}
+
+.container {
+  max-width: $container;
+  margin: 0 auto;
+  padding: 88px 24px;
+
+  @media (max-width: $bp-md) {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+.section {
+  &--soft {
+    background: $bg-soft;
+  }
+}
+
+.eyebrow {
+  margin-bottom: 12px;
+  color: $green-link;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.section-title {
+  margin-bottom: 40px;
+  font-size: 40px;
+  line-height: 1.15;
+
+  @media (max-width: $bp-md) {
+    font-size: 32px;
+  }
+}
+
+// ---------- buttons ----------
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  border-radius: $pill;
+  font: inherit;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+
+  &--primary {
+    background: $accent;
+    color: #fff;
+
+    &:hover {
+      background: $green-link-hover;
+      color: #fff;
+    }
+  }
+
+  &--outline {
+    background: $bg;
+    border-color: $line-input;
+    color: $text;
+
+    &:hover {
+      border-color: $accent;
+      color: $text;
+    }
+  }
+
+  &--white {
+    background: #fff;
+    color: $text-heading;
+    font-weight: 700;
+
+    &:hover {
+      background: $bg-tint;
+      color: $text-heading;
+    }
+  }
+
+  &--ghost {
+    border-color: $line-on-dark;
+    color: #fff;
+
+    &:hover {
+      border-color: #fff;
+      color: #fff;
+    }
+  }
+
+  &--lg {
+    padding: 16px 28px;
+    font-size: 17px;
+  }
+}
+
+// ---------- cards ----------
+.cards {
+  display: grid;
+  gap: 20px;
+
+  &--services {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  &--steps {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  &--reviews {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
