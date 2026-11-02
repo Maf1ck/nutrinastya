@@ -1,19 +1,19 @@
+<script setup lang="ts">
+const photo = `${import.meta.env.BASE_URL}imghero.JPG`
+</script>
+
 <template lang="pug">
 section.section.section--soft.hero
   .hero__inner
     .hero__content
       .hero__badge Нутриціолог · онлайн по всій Україні
       h1.hero__title Харчування без жорстких дієт і зривів
-      p.hero__text Допоможу налагодити раціон під ваш ритм життя: більше енергії, спокійні стосунки з їжею та звички, що залишаються надовго.
+      p.hero__text Я, Настя, допоможу налагодити раціон під ваш ритм життя: більше енергії, спокійні стосунки з їжею та звички, що залишаються надовго.
       .hero__actions
         a.btn.btn--primary.btn--lg(href='#contact') Безкоштовна консультація 15 хв
         a.btn.btn--outline.btn--lg(href='#quiz') Пройти тест
     .hero__photo
-      svg(width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' aria-hidden='true')
-        rect(x='3' y='5' width='18' height='14' rx='2')
-        circle(cx='9' cy='10' r='2')
-        path(d='M21 16l-5-5-8 8')
-      div Фото нутриціолога
+      img.hero__img(:src='photo' alt='Настя — нутриціолог' width='3554' height='5332' fetchpriority='high')
 </template>
 
 <style lang="scss">
@@ -67,6 +67,14 @@ section.section.section--soft.hero
     gap: 14px;
   }
 
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 22%;
+  }
+
   &__photo {
     display: flex;
     flex: 1 1 380px;
@@ -76,10 +84,46 @@ section.section.section--soft.hero
     gap: 12px;
     min-width: 0;
     height: 470px;
+    overflow: hidden;
     background: $bg-tint;
     border-radius: 28px;
     color: #4a6b53;
     font-size: 15px;
   }
+}
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes hero-photo-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+.hero__content > * {
+  animation: hero-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{($i - 1) * 0.12}s;
+    }
+  }
+}
+
+.hero__photo {
+  animation: hero-photo-in 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.hero__img {
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero__photo:hover .hero__img {
+  transform: scale(1.04);
 }
 </style>

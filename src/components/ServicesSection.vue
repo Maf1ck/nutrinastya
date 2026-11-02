@@ -2,20 +2,19 @@
 import ServiceCard from './ServiceCard.vue'
 
 const services = [
-  { title: 'Разова консультація', text: '60 хв онлайн: розбір харчування, анкета, рекомендації письмово.' },
-  { title: 'Супровід 4 тижні', text: 'Персональний план, щоденник їжі в кабінеті, щотижневі зустрічі й підтримка в чаті.', featured: true },
-  { title: 'Розбір аналізів', text: 'Пояснення результатів простими словами та поради щодо раціону. Не замінює лікаря.' },
-  { title: 'Меню на тиждень', text: 'Готове меню з рецептами та списком покупок під ваші смаки.' },
+  { title: 'Консультація', text: '60 хв онлайн: розбір харчування, анкета, рекомендації письмово.', price: 400 },
+  { title: 'Індивідуальний супровід на місяць', text: 'Персональний план, щоденник їжі в кабінеті, щотижневі зустрічі й підтримка в чаті.', price: 3000, featured: true },
+  { title: 'Раціон на тиждень', text: 'Готове меню з рецептами та списком покупок під ваші смаки.', price: 600 },
 ]
 </script>
 
 <template lang="pug">
 section#services.section.section--soft
   .container
-    .eyebrow Послуги
-    h2.section-title Оберіть формат роботи
+    .eyebrow(v-reveal='0') Послуги
+    h2.section-title(v-reveal='100') Оберіть формат роботи
     .cards.cards--services
-      ServiceCard(v-for='s in services' :key='s.title' v-bind='s')
+      ServiceCard(v-for='(s, i) in services' :key='s.title' v-bind='s' v-reveal='i * 120')
 </template>
 
 <style lang="scss">

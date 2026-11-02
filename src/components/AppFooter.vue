@@ -1,6 +1,6 @@
 <template lang="pug">
 footer#contact.footer
-  .footer__inner
+  .footer__inner(v-reveal='0')
     div
       h2.footer__title Почнімо з безкоштовної розмови
       p.footer__contacts [Телефон] · [Email] · онлайн по всій Україні

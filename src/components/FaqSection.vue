@@ -8,9 +8,9 @@ const faq = [
 
 <template lang="pug">
 section#faq.container
-  h2.section-title Часті питання
+  h2.section-title(v-reveal='0') Часті питання
   .faq
-    .faq__item(v-for='item in faq' :key='item.q')
+    .faq__item(v-for='(item, i) in faq' :key='item.q' v-reveal='i * 100')
       .faq__q {{ item.q }}
       p {{ item.a }}
 </template>

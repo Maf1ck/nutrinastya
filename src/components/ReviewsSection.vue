@@ -6,10 +6,10 @@ const reviews = [1, 2, 3]
 
 <template lang="pug">
 section#reviews.container
-  .eyebrow Відгуки
-  h2.section-title Що кажуть клієнти
+  .eyebrow(v-reveal='0') Відгуки
+  h2.section-title(v-reveal='100') Що кажуть клієнти
   .cards.cards--reviews
-    ReviewCard(v-for='r in reviews' :key='r')
+    ReviewCard(v-for='(r, i) in reviews' :key='r' v-reveal='i * 120')
 </template>
 
 <style lang="scss">

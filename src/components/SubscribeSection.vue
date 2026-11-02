@@ -1,6 +1,6 @@
 <template lang="pug">
 section.section.section--soft
-  .container.subscribe
+  .container.subscribe(v-reveal='0')
     .subscribe__info
       h2 Безкоштовне меню на 3 дні
       p Прості рецепти та список покупок — надішлю на пошту.

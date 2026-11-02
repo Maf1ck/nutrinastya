@@ -12,10 +12,10 @@ const steps = [
 <template lang="pug">
 section.section.section--soft
   .container
-    .eyebrow Як ми працюємо
-    h2.section-title Від анкети до звичок
+    .eyebrow(v-reveal='0') Як ми працюємо
+    h2.section-title(v-reveal='100') Від анкети до звичок
     .cards.cards--steps
-      StepCard(v-for='(step, i) in steps' :key='step.title' :number='i + 1' v-bind='step')
+      StepCard(v-for='(step, i) in steps' :key='step.title' :number='i + 1' v-bind='step' v-reveal='i * 120')
 </template>
 
 <style lang="scss">

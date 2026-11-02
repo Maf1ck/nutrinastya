@@ -9,6 +9,7 @@ import ReviewsSection from '@/components/ReviewsSection.vue'
 import SubscribeSection from '@/components/SubscribeSection.vue'
 import FaqSection from '@/components/FaqSection.vue'
 import AppFooter from '@/components/AppFooter.vue'
+import ScrollTopButton from '@/components/ScrollTopButton.vue'
 </script>
 
 <template lang="pug">
@@ -23,4 +24,5 @@ main
   SubscribeSection
   FaqSection
 AppFooter
+ScrollTopButton
 </template>

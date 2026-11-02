@@ -2,6 +2,7 @@
 defineProps<{
   title: string
   text: string
+  price: number
   featured?: boolean
 }>()
 </script>
@@ -11,7 +12,7 @@ defineProps<{
   .service__badge(v-if='featured') Найпопулярніше
   h3.service__title {{ title }}
   p.service__text {{ text }}
-  .service__price [ЦІНА] ₴
+  .service__price {{ price }} ₴
   a.btn(href='#contact' :class="featured ? 'btn--white' : 'btn--outline'") Обрати
 </template>
 
@@ -61,6 +62,14 @@ defineProps<{
     color: $text-heading;
     font-size: 13px;
     font-weight: 700;
+  }
+}
+.service {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba($green-dark, 0.12);
   }
 }
 </style>

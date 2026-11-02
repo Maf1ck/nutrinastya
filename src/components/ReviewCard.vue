@@ -46,4 +46,12 @@ withDefaults(
     }
   }
 }
+.review {
+  transition: border-color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    border-color: $line-input;
+    transform: translateY(-4px);
+  }
+}
 </style>

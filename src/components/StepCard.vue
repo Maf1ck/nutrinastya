@@ -42,4 +42,20 @@ defineProps<{
     color: $text-muted;
   }
 }
+.step {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba($green-dark, 0.1);
+  }
+
+  &__num {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  &:hover &__num {
+    transform: scale(1.12) rotate(-6deg);
+  }
+}
 </style>
