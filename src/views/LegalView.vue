@@ -2,12 +2,13 @@
 import { computed, watchEffect } from 'vue'
 import AppFooter from '@/components/AppFooter.vue'
 import { LEGAL_DOCS, type LegalKey } from '@/content/legal'
+import { legalSeo } from '@/config/seo'
 
 const props = defineProps<{ doc: LegalKey }>()
 const page = computed(() => LEGAL_DOCS[props.doc])
 
 watchEffect(() => {
-  document.title = `${page.value.title} — Настя, нутриціолог`
+  document.title = legalSeo(props.doc).title
 })
 </script>
 

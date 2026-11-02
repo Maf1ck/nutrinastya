@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import { HOME_SEO } from '@/config/seo'
 
 const LegalView = () => import('@/views/LegalView.vue')
 const legal = (path: string, doc: string) => ({ path, name: doc, component: LegalView, props: { doc } })
@@ -21,7 +22,7 @@ const router = createRouter({
 })
 
 router.afterEach((to) => {
-  if (to.name === 'home') document.title = 'Настя — нутриціолог онлайн'
+  if (to.name === 'home') document.title = HOME_SEO.title
 })
 
 export default router

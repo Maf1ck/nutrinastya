@@ -1,4 +1,4 @@
-import { CONTACTS, OWNER } from '@/config/site'
+import { CONTACTS, OWNER } from '../config/site'
 
 export interface LegalSection {
   heading: string

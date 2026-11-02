@@ -1,11 +1,8 @@
 <script setup lang="ts">
+import { SERVICES } from '@/content/home'
 import ServiceCard from './ServiceCard.vue'
 
-const services = [
-  { title: 'Консультація', text: '60 хв онлайн: розбір харчування, анкета, рекомендації письмово.', price: 400 },
-  { title: 'Індивідуальний супровід на місяць', text: 'Персональний план, щоденник їжі в кабінеті, щотижневі зустрічі й підтримка в чаті.', price: 3000, featured: true },
-  { title: 'Раціон на тиждень', text: 'Готове меню з рецептами та списком покупок під ваші смаки.', price: 600 },
-]
+const services = SERVICES
 </script>
 
 <template lang="pug">

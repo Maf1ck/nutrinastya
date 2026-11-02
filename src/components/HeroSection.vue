@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { CONTACTS } from '@/config/site'
 
-const photo = `${import.meta.env.BASE_URL}imghero.JPG`
+const photo = `${import.meta.env.BASE_URL}hero.jpg`
 </script>
 
 <template lang="pug">
@@ -15,7 +15,7 @@ section.section.section--soft.hero
         a.btn.btn--primary.btn--lg(:href='CONTACTS.telegram' target='_blank' rel='noopener') Безкоштовна консультація 15 хв
         a.btn.btn--outline.btn--lg(href='#quiz') Пройти тест
     .hero__photo
-      img.hero__img(:src='photo' alt='Настя — нутриціолог' width='3554' height='5332' fetchpriority='high')
+      img.hero__img(:src='photo' alt='Настя — нутриціолог' width='1200' height='1800' fetchpriority='high')
 </template>
 
 <style lang="scss">
