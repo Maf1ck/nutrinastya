@@ -1,16 +1,22 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import ImageLightbox, { type LightboxItem } from './ImageLightbox.vue'
+
 const stats = [
   { value: '3+', label: 'роки практики' },
   { value: '100+', label: 'клієнтів' },
   { value: '5', label: 'дипломів і сертифікатів' },
 ]
 
-const certificates = [
-  'Базова нутриціологія',
-  'Спортивна нутриціологія',
-  'Нутриціологія professional level',
-  'Харчування при аутоімунних захворюваннях',
+const base = import.meta.env.BASE_URL
+const certificates: LightboxItem[] = [
+  { title: 'Нутриціологія. Basic Level', meta: 'NUTRI LAB · 70 годин · 2024', src: `${base}photo_1_2026-11-02_12-24-08.jpg` },
+  { title: 'Спортивна нутриціологія', meta: 'NUTRI LAB · 70 годин · 2025', src: `${base}photo_2_2026-11-02_12-24-08.jpg` },
+  { title: 'Нутриціологія. Professional Level', meta: 'NUTRI LAB · 35 годин · 2025', src: `${base}photo_4_2026-11-02_12-24-08.jpg` },
+  { title: 'Аутоімунні захворювання: від причин до харчової підтримки', meta: 'NUTRI LAB · практикум · 2026', src: `${base}photo_3_2026-11-02_12-24-08.jpg` },
 ]
+
+const active = ref<number | null>(null)
 </script>
 
 <template lang="pug">
@@ -37,12 +43,18 @@ section#about.container.about
         .edu__text «Біологія та здоров’я людини», хімія
 
     ul.certs
-      li.certs__item(v-for='c in certificates' :key='c')
-        .certs__icon
-          svg(width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true')
-            circle(cx='12' cy='9' r='6')
-            path(d='M8.5 14 7 22l5-3 5 3-1.5-8')
-        span {{ c }}
+      li(v-for='(c, i) in certificates' :key='c.src')
+        button.certs__item(type='button' :aria-label="'Переглянути сертифікат: ' + c.title" @click='active = i')
+          .certs__thumb
+            img(:src='c.src' :alt='c.title' loading='lazy')
+            span.certs__zoom(aria-hidden='true')
+              svg(width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' aria-hidden='true')
+                circle(cx='11' cy='11' r='7')
+                path(d='m20 20-3.5-3.5M11 8v6M8 11h6')
+          .certs__title {{ c.title }}
+          .certs__meta {{ c.meta }}
+
+  ImageLightbox(v-model='active' :items='certificates')
 </template>
 
 <style lang="scss">
@@ -176,34 +188,84 @@ section#about.container.about
     grid-template-columns: 1fr;
   }
 
+  li {
+    display: flex;
+  }
+
   &__item {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 16px;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 10px 14px;
     background: $bg;
+    border: none;
     border-radius: 16px;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.4;
+    color: $text;
+    font: inherit;
+    text-align: left;
+    cursor: zoom-in;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba($green-dark, 0.08);
+      box-shadow: 0 10px 24px rgba($green-dark, 0.1);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $accent;
+      outline-offset: 2px;
     }
   }
 
-  &__icon {
+  &__thumb {
+    position: relative;
+    margin-bottom: 6px;
+    overflow: hidden;
+    aspect-ratio: 1.42;
+    border: 1px solid $line;
+    border-radius: 10px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  }
+
+  &__zoom {
+    position: absolute;
+    inset: 0;
     display: flex;
-    flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: $bg-selected;
-    border-radius: 50%;
-    color: $accent;
+    background: rgba($green-dark, 0.45);
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &__item:hover &__thumb img {
+    transform: scale(1.06);
+  }
+
+  &__item:hover &__zoom {
+    opacity: 1;
+  }
+
+  &__title {
+    padding: 0 4px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  &__meta {
+    padding: 0 4px;
+    color: $text-muted;
+    font-size: 12px;
   }
 }
 </style>

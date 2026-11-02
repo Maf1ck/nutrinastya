@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { CONTACTS } from '@/config/site'
+
 const photo = `${import.meta.env.BASE_URL}imghero.JPG`
 </script>
 
@@ -10,7 +12,7 @@ section.section.section--soft.hero
       h1.hero__title Харчування без жорстких дієт і зривів
       p.hero__text Я, Настя, допоможу налагодити раціон під ваш ритм життя: більше енергії, спокійні стосунки з їжею та звички, що залишаються надовго.
       .hero__actions
-        a.btn.btn--primary.btn--lg(href='#contact') Безкоштовна консультація 15 хв
+        a.btn.btn--primary.btn--lg(:href='CONTACTS.telegram' target='_blank' rel='noopener') Безкоштовна консультація 15 хв
         a.btn.btn--outline.btn--lg(href='#quiz') Пройти тест
     .hero__photo
       img.hero__img(:src='photo' alt='Настя — нутриціолог' width='3554' height='5332' fetchpriority='high')
@@ -28,6 +30,11 @@ section.section.section--soft.hero
     max-width: $container;
     margin: 0 auto;
     padding: 72px 24px 88px;
+
+    @media (max-width: $bp-md) {
+      gap: 32px;
+      padding: 36px 16px 56px;
+    }
   }
 
   &__content {
@@ -59,12 +66,24 @@ section.section.section--soft.hero
     max-width: 520px;
     color: $text-muted;
     font-size: 19px;
+
+    @media (max-width: $bp-md) {
+      font-size: 17px;
+    }
   }
 
   &__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+
+      .btn {
+        width: 100%;
+      }
+    }
   }
 
   &__img {
@@ -85,6 +104,11 @@ section.section.section--soft.hero
     min-width: 0;
     height: 470px;
     overflow: hidden;
+
+    @media (max-width: $bp-md) {
+      height: 420px;
+      border-radius: 22px;
+    }
     background: $bg-tint;
     border-radius: 28px;
     color: #4a6b53;

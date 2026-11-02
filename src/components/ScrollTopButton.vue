@@ -23,6 +23,7 @@ Transition(name='scroll-top')
   position: fixed;
   right: 24px;
   bottom: 24px;
+
   z-index: 40;
   display: flex;
   align-items: center;
@@ -44,6 +45,13 @@ Transition(name='scroll-top')
 
   &:active {
     transform: scale(0.94);
+  }
+
+  @media (max-width: $bp-md) {
+    right: 16px;
+    bottom: 16px;
+    width: 46px;
+    height: 46px;
   }
 }
 

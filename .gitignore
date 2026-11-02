@@ -40,3 +40,11 @@ __screenshots__/
 
 test-results/
 playwright-report/
+
+# Env (секрети: токен бота тощо)
+.env
+.env.*
+!.env.example
+
+# Vercel
+.vercel

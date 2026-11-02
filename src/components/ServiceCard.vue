@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { CONTACTS } from '@/config/site'
+
 defineProps<{
   title: string
   text: string
@@ -13,7 +15,7 @@ defineProps<{
   h3.service__title {{ title }}
   p.service__text {{ text }}
   .service__price {{ price }} ₴
-  a.btn(href='#contact' :class="featured ? 'btn--white' : 'btn--outline'") Обрати
+  a.btn(:href='CONTACTS.telegram' target='_blank' rel='noopener' :class="featured ? 'btn--white' : 'btn--outline'") Записатися
 </template>
 
 <style lang="scss">

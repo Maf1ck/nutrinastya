@@ -32,6 +32,14 @@ export default defineConfigWithVueTs(
     files: ['src/**/__tests__/*'],
   },
 
+  // Шаблони пишемо на pug, а vue-eslint-parser його не розбирає, тож змінні,
+  // використані лише в шаблоні, виглядають «невикористаними». Типи перевіряє vue-tsc.
+  {
+    name: 'app/vue-pug-templates',
+    files: ['**/*.vue'],
+    rules: { '@typescript-eslint/no-unused-vars': 'off' },
+  },
+
   ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
 
   skipFormatting,

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { CONTACTS } from '@/config/site'
 
 type HabitType = 'balanced' | 'rushed' | 'emotional'
 
@@ -149,7 +150,7 @@ section#quiz.container
     .quiz__info
       .eyebrow Тест за 2 хвилини
       h2.quiz__title Який у вас тип харчових звичок?
-      p 7 простих питань — і ви отримаєте результат з порадами та чек-лист «Тарілка здорового харчування» на пошту.
+      p 7 простих питань — і ви одразу отримаєте результат з персональними порадами.
     .quiz__card
       .quiz__meta
         span(v-if='!finished') Питання {{ current + 1 }} з {{ questions.length }}
@@ -177,7 +178,7 @@ section#quiz.container
             li(v-for='tip in result.tips' :key='tip') {{ tip }}
           .quiz__actions
             button.btn.btn--outline(type='button' @click='restart') Пройти ще раз
-            a.btn.btn--primary(href='#contact') Обговорити з Настею
+            a.btn.btn--primary(:href='CONTACTS.telegram' target='_blank' rel='noopener') Обговорити з Настею
 </template>
 
 <style lang="scss">
