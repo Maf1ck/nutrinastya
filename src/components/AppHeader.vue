@@ -10,6 +10,7 @@ const nav = [
   { href: '#quiz', label: 'Тест' },
   { href: '#reviews', label: 'Відгуки' },
   { href: '#faq', label: 'FAQ' },
+  { href: '/blog', label: 'Блог' },
 ]
 
 const menuOpen = ref(false)
