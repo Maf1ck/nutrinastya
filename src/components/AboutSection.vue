@@ -23,7 +23,7 @@ const active = ref<number | null>(null)
 section#about.container.about
   .about__intro
     .eyebrow(v-reveal='0') Про мене
-    h2.section-title(v-reveal='100') Привіт, я Настя
+    h2.section-title(v-reveal='100') Привіт, я Анастасія
     p.about__lead(v-reveal='150') Нутриціолог із біологічною освітою. Понад три роки допомагаю налагодити харчування без заборонених продуктів — з повагою до вашого способу життя, з опорою на звички й самопочуття.
     .about__stats
       .stat(v-for='(s, i) in stats' :key='s.value' v-reveal='200 + i * 120')

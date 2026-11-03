@@ -10,12 +10,12 @@ section.section.section--soft.hero
     .hero__content
       .hero__badge Нутриціолог · онлайн по всій Україні
       h1.hero__title Харчування без жорстких дієт і зривів
-      p.hero__text Я, Настя, допоможу налагодити раціон під ваш ритм життя: більше енергії, спокійні стосунки з їжею та звички, що залишаються надовго.
+      p.hero__text Я, Анастасія, допоможу налагодити раціон під ваш ритм життя: більше енергії, спокійні стосунки з їжею та звички, що залишаються надовго.
       .hero__actions
         a.btn.btn--primary.btn--lg(:href='CONTACTS.telegram' target='_blank' rel='noopener') Безкоштовна консультація 15 хв
         a.btn.btn--outline.btn--lg(href='#quiz') Пройти тест
     .hero__photo
-      img.hero__img(:src='photo' alt='Настя — нутриціолог' width='1200' height='1800' fetchpriority='high')
+      img.hero__img(:src='photo' alt='Анастасія — нутриціолог' width='1200' height='1800' fetchpriority='high')
 </template>
 
 <style lang="scss">

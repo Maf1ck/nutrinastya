@@ -21,7 +21,7 @@ footer.footer
         svg(width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true')
           path(d='M5 19c0-8 5-13 14-14-1 9-6 14-14 14z')
           path(d='M5 19l7-7')
-        | Настя · нутриціолог
+        | Анастасія · нутриціолог
       p.footer__about Харчування без жорстких дієт і зривів. Онлайн-консультації по всій Україні та за кордоном.
       a.btn.btn--white.footer__cta(:href='CONTACTS.telegram' target='_blank' rel='noopener') Записатися в Telegram
 
@@ -39,7 +39,7 @@ footer.footer
       a(:href='CONTACTS.instagram' target='_blank' rel='noopener') Instagram {{ CONTACTS.instagramHandle }}
 
   .footer__bottom
-    p © {{ year }}, Настя · нутриціолог ({{ OWNER.name }}). Всі права захищені.
+    p © {{ year }}, Анастасія · нутриціолог ({{ OWNER.name }}). Всі права захищені.
     p.footer__disclaimer Інформація на сайті має ознайомчий характер, не є медичною консультацією і не замінює візиту до лікаря.
 </template>
 

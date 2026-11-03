@@ -49,7 +49,7 @@ header.header(:class="{ 'header--scrolled': scrolled || menuOpen, 'header--menu-
       svg(width='30' height='30' viewBox='0 0 24 24' fill='none' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true')
         path(d='M5 19c0-8 5-13 14-14-1 9-6 14-14 14z')
         path(d='M5 19l7-7')
-      span Настя
+      span Анастасія
         span.header__logo-role  · нутриціолог
 
     nav.header__nav(aria-label='Основна навігація')

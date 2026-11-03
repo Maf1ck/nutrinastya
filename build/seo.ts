@@ -34,7 +34,7 @@ function jsonLd(): string {
     '@type': 'Person',
     '@id': `${SITE_URL}/#person`,
     name: OWNER.name,
-    alternateName: 'Настя',
+    alternateName: 'Анастасія',
     jobTitle: 'Нутриціолог',
     url: url('/'),
     image: `${SITE_URL}/hero.jpg`,
