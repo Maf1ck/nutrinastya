@@ -15,7 +15,7 @@ export interface LegalDoc {
 
 export type LegalKey = 'privacy' | 'terms' | 'disclaimer'
 
-const UPDATED = '2 листопада 2026 р.'
+const UPDATED = '4 листопада 2026 р.'
 const tg = `Telegram ${CONTACTS.telegramHandle}`
 
 export const LEGAL_DOCS: Record<LegalKey, LegalDoc> = {
@@ -55,7 +55,10 @@ export const LEGAL_DOCS: Record<LegalKey, LegalDoc> = {
       },
       {
         heading: 'Cookies та аналітика',
-        paragraphs: ['Сайт не використовує рекламні cookies та сервіси аналітики.'],
+        paragraphs: [
+          'Сайт не використовує рекламні cookies.',
+          'Для підрахунку відвідувань використовується Vercel Web Analytics. Сервіс не встановлює cookies і не збирає персональних даних: враховуються лише знеособлені дані — яку сторінку відкрито, звідки здійснено перехід, країна, тип пристрою та браузер. Ці дані не дозволяють вас ідентифікувати.',
+        ],
       },
       {
         heading: 'Ваші права',
