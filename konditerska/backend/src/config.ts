@@ -3,6 +3,8 @@ import path from 'node:path'
 const rootDir = path.resolve(import.meta.dirname, '..')
 
 export const isProduction = process.env.NODE_ENV === 'production'
+/** Running as a Vercel Function: read-only code dir, only /tmp is writable (and not persistent). */
+export const onVercel = Boolean(process.env.VERCEL)
 
 export const config = {
   port: Number(process.env.PORT ?? 3001),
@@ -19,12 +21,11 @@ export const config = {
    * Keep 0 when the app is exposed directly, otherwise client IPs can be spoofed
    * through X-Forwarded-For and rate limits are bypassed.
    */
-  trustProxy: Number(process.env.TRUST_PROXY ?? 0),
+  trustProxy: Number(process.env.TRUST_PROXY ?? (onVercel ? 1 : 0)),
   telegramToken: process.env.TELEGRAM_BOT_TOKEN ?? '',
   telegramChatId: process.env.TELEGRAM_CHAT_ID ?? '',
-  dbPath: process.env.DB_PATH ?? path.join(rootDir, 'data', 'shop.db'),
-  uploadsDir: process.env.UPLOADS_DIR ?? path.join(rootDir, 'uploads'),
-  seedImagesDir: path.join(rootDir, 'seed-images'),
+  dbPath: process.env.DB_PATH ?? (onVercel ? '/tmp/shop.db' : path.join(rootDir, 'data', 'shop.db')),
+  uploadsDir: process.env.UPLOADS_DIR ?? (onVercel ? '/tmp/uploads' : path.join(rootDir, 'uploads')),
   frontendDist: process.env.FRONTEND_DIST ?? path.resolve(rootDir, '..', 'frontend', 'dist'),
   sessionTtlMs: 12 * 60 * 60 * 1000,
 }

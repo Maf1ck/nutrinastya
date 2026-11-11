@@ -46,7 +46,7 @@ export async function notifyNewOrder(order: OrderNotification): Promise<void> {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: config.telegramChatId, text, parse_mode: 'HTML' }),
-      signal: AbortSignal.timeout(8000),
+      signal: AbortSignal.timeout(4000),
     })
     if (!response.ok) console.error(`Telegram notification failed: HTTP ${response.status}`)
   } catch (error) {

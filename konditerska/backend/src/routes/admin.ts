@@ -4,7 +4,7 @@ import path from 'node:path'
 import express, { Router } from 'express'
 import { z } from 'zod'
 import { checkPassword, checkUsername, createToken, globalLoginLimiter, loginLimiter, requireAdmin } from '../auth.ts'
-import { config } from '../config.ts'
+import { config, onVercel } from '../config.ts'
 import { db } from '../db.ts'
 import { HttpError, parse, parseId } from '../http.ts'
 import {
@@ -33,7 +33,7 @@ const imageUrlSchema = z
   .string()
   .trim()
   .max(500)
-  .refine((value) => value === '' || /^\/uploads\/[\w.-]+$/.test(value) || /^https:\/\/[^\s"'<>]+$/.test(value), {
+  .refine((value) => value === '' || /^\/(uploads|demo)\/[\w.-]+$/.test(value) || /^https:\/\/[^\s"'<>]+$/.test(value), {
     message: 'Дозволені лише завантажені фото або посилання https://',
   })
   .default('')
@@ -327,6 +327,10 @@ const IMAGE_EXTENSIONS: Record<string, string> = {
 }
 
 adminRouter.post('/upload', (req, res) => {
+  // Vercel Functions have no persistent disk, and express.static is not served there.
+  if (onVercel) {
+    throw new HttpError(501, 'На Vercel завантаження фото потребує сховища (Vercel Blob). Поки що вставте посилання https:// на фото')
+  }
   const { dataUrl } = parse(z.object({ dataUrl: z.string().min(1) }), req.body)
   const match = /^data:(image\/(?:png|jpeg|webp));base64,([A-Za-z0-9+/=]+)$/.exec(dataUrl)
   const mime = match?.[1]
@@ -352,7 +356,7 @@ adminRouter.post('/upload', (req, res) => {
 adminRouter.delete('/upload', (req, res) => {
   const { url } = parse(z.object({ url: z.string() }), req.query)
   const name = path.basename(url)
-  if (url !== `/uploads/${name}` || name.startsWith('demo-')) {
+  if (url !== `/uploads/${name}`) {
     res.json({ ok: true })
     return
   }

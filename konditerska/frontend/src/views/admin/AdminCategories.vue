@@ -122,6 +122,8 @@ form.adm-card(v-if="formOpen" @submit.prevent="save")
       input(:id="id" v-model.number="form.sortOrder" type="number" step="1")
     form-field(label="Фото плитки (якщо не вказати — візьметься фото першого товару)" :error="fieldErrors.imageUrl" v-slot="{ id }")
       input(:id="id" type="file" accept="image/png,image/jpeg,image/webp" @change="onFile")
+    form-field(label="…або посилання на фото (https://…)" :error="fieldErrors.imageUrl" v-slot="{ id }")
+      input(:id="id" v-model.trim="form.imageUrl" type="url" placeholder="https://")
   .adm-row(v-if="form.imageUrl")
     img.adm-preview(:src="form.imageUrl" alt="Попередній перегляд")
     button.adm-btn.adm-btn--ghost.adm-btn--small(type="button" @click="form.imageUrl = ''") Прибрати фото

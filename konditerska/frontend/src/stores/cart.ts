@@ -22,7 +22,7 @@ function readStored(): CartLine[] {
         typeof line.price === 'number' &&
         typeof line.weightLabel === 'string' &&
         typeof line.imageUrl === 'string' &&
-        (/^\/uploads\/[\w.-]+$/.test(line.imageUrl) || /^https:\/\//.test(line.imageUrl) || line.imageUrl === ''),
+        (/^\/(uploads|demo)\/[\w.-]+$/.test(line.imageUrl) || /^https:\/\//.test(line.imageUrl) || line.imageUrl === ''),
     )
   } catch {
     return []

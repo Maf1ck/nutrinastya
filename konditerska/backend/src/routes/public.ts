@@ -1,5 +1,6 @@
 import express, { Router } from 'express'
 import { z } from 'zod'
+import { onVercel } from '../config.ts'
 import { db, transaction } from '../db.ts'
 import { HttpError, parse } from '../http.ts'
 import { notifyNewOrder } from '../notify.ts'
@@ -126,7 +127,7 @@ const orderSchema = z.object({
     .max(50),
 })
 
-publicRouter.post('/orders', orderLimiter.hit, (req, res) => {
+publicRouter.post('/orders', orderLimiter.hit, async (req, res) => {
   const data = parse(orderSchema, req.body)
 
   // Pretend success to bots so they do not learn they were detected.
@@ -208,8 +209,9 @@ publicRouter.post('/orders', orderLimiter.hit, (req, res) => {
     return { id, total, label, priced }
   })
 
-  // Fire and forget: a slow or failing notification must not delay or fail the order.
-  void notifyNewOrder({
+  // notifyNewOrder never throws and times out after a few seconds. Locally it runs in the
+  // background; on Vercel the function can be frozen right after the response, so wait for it.
+  const notification = notifyNewOrder({
     id: created.id,
     customerName: data.customerName,
     phone,
@@ -220,6 +222,7 @@ publicRouter.post('/orders', orderLimiter.hit, (req, res) => {
     total: created.total,
     items: created.priced,
   })
+  if (onVercel) await notification
 
   res.status(201).json({ id: created.id, total: created.total })
 })

@@ -1,6 +1,3 @@
-import { copyFileSync, existsSync, mkdirSync } from 'node:fs'
-import path from 'node:path'
-import { config } from './config.ts'
 import { db, transaction } from './db.ts'
 
 interface SeedCategory {
@@ -31,7 +28,6 @@ const categories: SeedCategory[] = [
   { slug: 'kava-ta-napoi', name: 'Кава та напої', tone: 3, description: 'Кава та напої до десерту' },
 ]
 
-// Demo photos are bundled in `seed-images/` and copied to the uploads folder.
 const products: SeedProduct[] = [
   { category: 'torty', name: 'Ягідний торт', weight: '1,2 кг', price: 650, image: 'berry-cake.png', popular: true },
   { category: 'torty', name: 'Ванільний торт з ягодами', weight: '1,2 кг', price: 650, image: 'berry-cake.png', popular: true },
@@ -57,13 +53,8 @@ const pickupPoints = [
   { name: 'Точка 3', address: '[Адреса 3]' },
 ]
 
-function copyDemoImage(fileName: string): string {
-  mkdirSync(config.uploadsDir, { recursive: true })
-  const target = `demo-${fileName}`
-  const targetPath = path.join(config.uploadsDir, target)
-  if (!existsSync(targetPath)) copyFileSync(path.join(config.seedImagesDir, fileName), targetPath)
-  return `/uploads/${target}`
-}
+/** Demo photos live in frontend/public/demo and are served by the frontend. */
+const demoImage = (fileName: string) => `/demo/${fileName}`
 
 /** Fills an empty database with demo data. Does nothing when categories already exist. */
 export function seedIfEmpty(): boolean {
@@ -91,7 +82,7 @@ export function seedIfEmpty(): boolean {
         product.name,
         product.weight,
         product.price,
-        copyDemoImage(product.image),
+        demoImage(product.image),
         product.frozen === false ? 0 : 1,
         product.popular ? 1 : 0,
         index,
