@@ -1,0 +1,149 @@
+// Design tokens (source: Figma "Imaginarium — шаблон для кондитерів").
+// Colors point to CSS custom properties declared in global.scss, so a client's
+// brand can be applied by overriding a handful of variables.
+
+// ---------- Colors ----------
+$c-bg: var(--c-bg);
+$c-bg-alt: var(--c-bg-alt);
+$c-card: var(--c-card);
+$c-ink: var(--c-ink);
+$c-ink-dark: var(--c-ink-dark);
+$c-muted: var(--c-muted);
+$c-line: var(--c-line);
+$c-accent: var(--c-accent);
+$c-on-dark: var(--c-on-dark);
+$c-on-dark-muted: var(--c-on-dark-muted);
+$c-line-on-dark: var(--c-line-on-dark);
+$c-danger: var(--c-danger);
+$c-tile-1: var(--c-tile-1);
+$c-tile-2: var(--c-tile-2);
+$c-tile-3: var(--c-tile-3);
+$c-tile-4: var(--c-tile-4);
+
+// ---------- Typography ----------
+$font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
+$font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+// ---------- Spacing scale ----------
+$s-4: 4px;
+$s-8: 8px;
+$s-12: 12px;
+$s-16: 16px;
+$s-20: 20px;
+$s-24: 24px;
+$s-28: 28px;
+$s-32: 32px;
+$s-40: 40px;
+$s-48: 48px;
+$s-64: 64px;
+$s-80: 80px;
+$s-96: 96px;
+
+// ---------- Radii ----------
+$r-input: 12px;
+$r-photo: 16px;
+$r-card: 20px;
+$r-tile: 24px;
+$r-panel: 28px;
+$r-pill: 999px;
+
+// ---------- Layout ----------
+$page-max: 1440px;
+$gutter-mobile: 16px;
+$gutter-tablet: 32px;
+$gutter-desktop: 80px;
+
+// ---------- Breakpoints (mobile-first) ----------
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+
+@mixin up($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin down($bp) {
+  @media (max-width: $bp - 1px) {
+    @content;
+  }
+}
+
+// ---------- Type styles ----------
+@mixin display-hero {
+  font-family: $font-serif;
+  font-weight: 600;
+  font-size: 46px;
+  line-height: 0.98;
+  @include up($bp-md) {
+    font-size: 68px;
+  }
+  @include up($bp-lg) {
+    font-size: 88px;
+    line-height: 84px;
+  }
+}
+
+@mixin display-page($desktop: 80px) {
+  font-family: $font-serif;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1;
+  @include up($bp-md) {
+    font-size: $desktop;
+  }
+}
+
+@mixin display-section {
+  font-family: $font-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.05;
+  @include up($bp-md) {
+    font-size: 60px;
+  }
+}
+
+@mixin title-lg($desktop: 32px) {
+  font-family: $font-serif;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.1;
+  @include up($bp-md) {
+    font-size: $desktop;
+  }
+}
+
+@mixin title-md {
+  font-family: $font-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.15;
+  @include up($bp-md) {
+    font-size: 26px;
+  }
+}
+
+@mixin eyebrow($size: 13px, $spacing: 0.14em) {
+  font-family: $font-sans;
+  font-weight: 600;
+  font-size: $size;
+  letter-spacing: $spacing;
+  text-transform: uppercase;
+}
+
+// ---------- Interaction ----------
+@mixin focus-ring {
+  outline: 2px solid $c-accent;
+  outline-offset: 3px;
+}
+
+@mixin hover-only {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}

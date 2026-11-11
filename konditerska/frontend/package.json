@@ -1,0 +1,27 @@
+{
+  "name": "konditerska-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --build && vite build",
+    "preview": "vite preview",
+    "lint": "vue-tsc --build"
+  },
+  "dependencies": {
+    "pinia": "^4.1.0",
+    "vue": "^3.5.45",
+    "vue-router": "^5.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "@vue/tsconfig": "^0.9.1",
+    "pug": "^3.0.4",
+    "sass": "^1.108.2",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.8",
+    "vue-tsc": "^3.3.14"
+  }
+}

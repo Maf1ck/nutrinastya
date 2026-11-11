@@ -1,0 +1,289 @@
+// Admin panel shared styles (global, `adm-` prefix). Imported by AdminLayout only.
+.adm {
+  min-height: 100vh;
+  background: $c-bg;
+
+  &-bar {
+    background: $c-ink-dark;
+    color: $c-bg;
+  }
+
+  &-bar__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $s-8 $s-24;
+    padding-block: $s-12;
+  }
+
+  &-bar .adm-btn--ghost {
+    border-color: $c-line-on-dark;
+    color: $c-bg;
+  }
+
+  &-brand {
+    font-family: $font-serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+  }
+
+  &-nav {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: $s-4;
+
+    a {
+      padding: $s-8 $s-16;
+      border-radius: $r-pill;
+      color: $c-on-dark;
+      font-size: 14px;
+      font-weight: 600;
+
+      &.router-link-active {
+        background: $c-bg;
+        color: $c-ink;
+      }
+    }
+  }
+
+  &-main {
+    display: flex;
+    flex-direction: column;
+    gap: $s-24;
+    padding-block: $s-32 $s-64;
+  }
+
+  &-h1 {
+    font-family: $font-serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  &-card {
+    display: flex;
+    flex-direction: column;
+    gap: $s-16;
+    padding: $s-20;
+    border-radius: $r-card;
+    background: $c-card;
+    @include up($bp-md) {
+      padding: $s-24;
+    }
+  }
+
+  &-card__title {
+    font-family: $font-serif;
+    font-weight: 600;
+    font-size: 24px;
+  }
+
+  &-grid {
+    display: grid;
+    gap: $s-16;
+    @include up($bp-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &-wide {
+    @include up($bp-md) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $s-12;
+  }
+
+  &-checks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $s-8 $s-24;
+
+    label {
+      display: inline-flex;
+      align-items: center;
+      gap: $s-8;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--c-ink);
+    }
+  }
+
+  &-btn {
+    padding: 10px $s-20;
+    border: 1px solid transparent;
+    border-radius: $r-pill;
+    background: $c-ink;
+    color: $c-bg;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &--ghost {
+      border-color: $c-line;
+      background: transparent;
+      color: $c-ink;
+    }
+
+    &--danger {
+      border-color: $c-danger;
+      background: transparent;
+      color: $c-danger;
+    }
+
+    &--small {
+      padding: 6px $s-12;
+      font-size: 13px;
+    }
+  }
+
+  &-badge {
+    padding: 4px $s-12;
+    border-radius: $r-pill;
+    background: $c-accent;
+    color: $c-ink-dark;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  &-error {
+    padding: $s-12 $s-16;
+    border-radius: $r-input;
+    background: rgb(166 61 47 / 12%);
+    color: $c-danger;
+    font-size: 14px;
+  }
+
+  &-muted {
+    color: $c-muted;
+    font-size: 14px;
+  }
+
+  &-table-wrap {
+    overflow-x: auto;
+  }
+
+  &-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+
+    th,
+    td {
+      padding: $s-12 $s-8;
+      border-bottom: 1px solid $c-line;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      color: $c-muted;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .is-off {
+      opacity: 0.5;
+    }
+  }
+
+  &-select {
+    padding: 8px $s-12;
+    border: 1px solid $c-line;
+    border-radius: $r-input;
+    background: $c-bg;
+    font-size: 14px;
+  }
+
+  &-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: $r-photo;
+    object-fit: cover;
+  }
+
+  &-orders {
+    display: flex;
+    flex-direction: column;
+    gap: $s-16;
+  }
+
+  &-order {
+    display: grid;
+    gap: $s-12;
+    padding: $s-20;
+    border-radius: $r-card;
+    background: $c-card;
+    border-left: 6px solid $c-line;
+
+    &[data-status='new'] {
+      border-left-color: $c-accent;
+    }
+    &[data-status='cancelled'] {
+      opacity: 0.6;
+    }
+
+    @include up($bp-md) {
+      grid-template-columns: 1fr 1fr auto;
+      align-items: start;
+    }
+
+    h2 {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: $s-4;
+      font-size: 14px;
+    }
+  }
+
+  &-login {
+    display: grid;
+    min-height: 100vh;
+    place-items: center;
+    padding: $s-16;
+    background: $c-bg;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: $s-16;
+      width: 100%;
+      max-width: 360px;
+      padding: $s-32;
+      border-radius: $r-tile;
+      background: $c-card;
+    }
+  }
+}

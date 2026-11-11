@@ -1,0 +1,27 @@
+{
+  "name": "konditerska-backend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/index.ts",
+    "start": "tsx --env-file-if-exists=.env src/index.ts",
+    "build": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "seed": "tsx --env-file-if-exists=.env src/seed-cli.ts",
+    "totp:setup": "tsx src/totp-setup.ts"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
