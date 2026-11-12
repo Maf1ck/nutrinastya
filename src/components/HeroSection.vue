@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { CONTACTS } from '@/config/site'
+import { HERO } from '@/content/home'
 
 const photo = `${import.meta.env.BASE_URL}hero.jpg`
 </script>
@@ -8,11 +9,11 @@ const photo = `${import.meta.env.BASE_URL}hero.jpg`
 section.section.section--soft.hero
   .hero__inner
     .hero__content
-      .hero__badge Нутриціолог · онлайн по всій Україні
-      h1.hero__title Харчування без жорстких дієт і зривів
-      p.hero__text Я, Анастасія, допоможу налагодити раціон під ваш ритм життя: більше енергії, спокійні стосунки з їжею та звички, що залишаються надовго.
+      .hero__badge {{ HERO.badge }}
+      h1.hero__title {{ HERO.title }}
+      p.hero__text {{ HERO.text }}
       .hero__actions
-        a.btn.btn--primary.btn--lg(:href='CONTACTS.telegram' target='_blank' rel='noopener') Безкоштовна консультація 15 хв
+        a.btn.btn--primary.btn--lg(:href='CONTACTS.telegram' target='_blank' rel='noopener') {{ HERO.cta }}
         a.btn.btn--outline.btn--lg(href='#quiz') Пройти тест
     .hero__photo
       img.hero__img(:src='photo' alt='Анастасія — нутриціолог' width='1200' height='1800' fetchpriority='high')

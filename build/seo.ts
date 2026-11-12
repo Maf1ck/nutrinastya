@@ -3,7 +3,7 @@ import { join } from 'node:path'
 import type { Plugin } from 'vite'
 import { CONTACTS, OWNER } from '../src/config/site'
 import { BLOG_SEO, HOME_SEO, PAGES, SITE_NAME, type PageSeo } from '../src/config/seo'
-import { FAQ, SERVICES } from '../src/content/home'
+import { FAQ, HERO, SERVICES } from '../src/content/home'
 import {
   ARTICLE_BY_SLUG,
   ARTICLES_SORTED,
@@ -235,7 +235,25 @@ function articleBody(a: Article): string {
   )
 }
 
+// Статична розмітка головної: H1, вступ, послуги, FAQ і посилання на блог.
+// Дані беруться з тих самих модулів, що й компоненти, тож тексти не розходяться.
+function homeBody(): string {
+  return (
+    `<main><section class="section section--soft hero"><div class="hero__inner"><div class="hero__content">` +
+    `<div class="hero__badge">${esc(HERO.badge)}</div>` +
+    `<h1 class="hero__title">${esc(HERO.title)}</h1>` +
+    `<p class="hero__text">${esc(HERO.text)}</p>` +
+    `<div class="hero__actions"><a class="btn btn--primary btn--lg" href="${esc(CONTACTS.telegram)}" rel="noopener">${esc(HERO.cta)}</a></div>` +
+    `</div></div></section>` +
+    `<section><h2>Послуги</h2><ul>${SERVICES.map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.text)} ${s.price} грн</p></li>`).join('')}</ul></section>` +
+    `<section><h2>Часті питання</h2>${FAQ.map((f) => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('')}</section>` +
+    `<section><h2>Блог</h2><ul>${ARTICLES_SORTED.map((a) => `<li><a href="${articlePath(a.slug)}">${esc(a.title)}</a></li>`).join('')}</ul></section>` +
+    `</main>`
+  )
+}
+
 function pageBody(page: PageSeo): string {
+  if (page.kind === 'home') return homeBody()
   if (page.kind === 'blog') return blogBody()
   const a = articleOf(page)
   return a ? articleBody(a) : ''
@@ -313,6 +331,9 @@ export function seo(): Plugin {
       const homeHead = head(HOME_SEO)
       if (!shell.includes(homeHead)) this.error('index.html не містить SEO-тегів головної (<!--seo-->)')
       if (!shell.includes(APP_ROOT)) this.error(`index.html не містить ${APP_ROOT}`)
+
+      // головна: shell лишається джерелом для інших сторінок, а dist/index.html отримує статичну розмітку
+      writeFileSync(join(outDir, 'index.html'), shell.replace(APP_ROOT, `<div id="app">${homeBody()}</div>`))
 
       for (const page of PAGES) {
         if (page.path === '/') continue
