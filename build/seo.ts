@@ -27,14 +27,10 @@ import {
  * Для блогу текст статей додатково вшивається в <div id="app">, щоб пошуковики
  * бачили контент без виконання JS. Vue під час mount просто замінює цю розмітку.
  *
- * Домен: SITE_URL → домен продакшену, який Vercel передає під час збірки → запасний.
+ * Домен: SITE_URL → основний домен www.nknutrition.com.ua. VERCEL_PROJECT_PRODUCTION_URL
+ * не використовуємо: Vercel віддає найкоротший домен проєкту (apex, який редіректить на www).
  */
-const SITE_URL = (
-  process.env.SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : 'https://nutrinastya.vercel.app')
-).replace(/\/+$/, '')
+const SITE_URL = (process.env.SITE_URL ?? 'https://www.nknutrition.com.ua').replace(/\/+$/, '')
 
 const OG_IMAGE = `${SITE_URL}/og-image.jpg`
 
