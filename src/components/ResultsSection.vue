@@ -1,81 +1,14 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import ResultCard, { type ClientResult } from './ResultCard.vue'
+import ResultCard from './ResultCard.vue'
+import { RESULTS } from '@/content/results'
 import ImageLightbox, { type LightboxItem } from './ImageLightbox.vue'
 
 const shot = (file: string) => `${import.meta.env.BASE_URL}reviews/${file}`
 
-const results: ClientResult[] = [
-  {
-    name: 'Ніна',
-    period: 'за 2 місяці',
-    metrics: ['−10 кг', '−10 см талія', '−9 см груди'],
-    request: 'Налагодити харчування на все життя і звичайно схуднути',
-    quote: 'Дякую тобі велике за наставництво ❤️ Це харчування прямо в кайф))',
-    screenshot: shot('nina.png'),
-  },
-  {
-    name: 'Олеся',
-    period: 'за 22 дні',
-    metrics: ['−3,7 кг', '−7 см талія', '−5 см таз'],
-    request: 'Дуже хочу навчитися правильно харчуватися і бонусом схуднути',
-    note: 'За 3 місяці −5 кг, і вага тримається.',
-    quote: 'Я чесно дуже приємно здивована) …І це при тому, що я стала більше їсти))',
-    screenshot: shot('olesia.png'),
-  },
-  {
-    name: 'Єлизавета',
-    period: 'за 1 місяць',
-    metrics: ['−5 кг', '−6 см талія'],
-    request: 'Зменшення ваги, покращення стану здоров’я, чиста шкіра, більше енергії',
-    quote: 'Мені дуже сподобалось питатись по меню, що ти прописала. Було смачно і зручно',
-    screenshot: shot('yelyzaveta.png'),
-  },
-  {
-    name: 'Карина',
-    period: 'за 1 місяць',
-    metrics: ['−5 кг', '−8 см талія'],
-    request: 'Навчитися контролювати харчування на постійній основі',
-    quote: 'Я вообще не думала, шо в мене шось вийде… ваше подружжя це взагалі скарб для мене 🥹❤️',
-    screenshot: shot('karyna.png'),
-  },
-  {
-    name: 'Катерина',
-    period: 'за 1 місяць',
-    metrics: ['−2 кг', '−4 см талія'],
-    request: 'Це напевно більше від мене буде залежить все) Тому сподіваюсь я впораюсь',
-    quote: 'Результат такий за пару місяців — це просто ВАУ ✨ Рецепти дуже смачні на ті продукти, що їм.',
-    screenshot: shot('kateryna.png'),
-  },
-  {
-    name: 'Олександра',
-    period: 'за 1 місяць',
-    metrics: ['−4 кг', '−7 см талія'],
-    request: 'Правильне харчування та налагодження здоров’я',
-    quote: 'Знаю) сама удивляюсь. Но мне нравится. Легче желудку',
-    screenshot: shot('oleksandra.png'),
-  },
-  {
-    name: 'Костянтин',
-    period: 'за 1 місяць',
-    metrics: ['+2 кг'],
-    request: 'Набір м’язової маси',
-    note: 'Фізіологічно оптимальний темп набору «чистої» ваги без зайвого жиру.',
-    quote: 'Нарешті почав нормально харчуватися, відразу помітно по організму, що стало набагато краще',
-    screenshot: shot('kostiantyn.png'),
-  },
-  {
-    name: 'Єлизавета',
-    period: 'за 3 тижні',
-    metrics: ['−3 кг', '−8 см талія', '−6 см таз'],
-    request: 'Покращення харчування',
-    note: 'Мета — −3 кг за 3 тижні, бо клієнтка готувалася до змагань.',
-    screenshot: shot('yelyzaveta-2.png'),
-  },
-]
-
+const results = RESULTS
 const screenshots = computed<LightboxItem[]>(() =>
-  results.map((r) => ({ title: `Результат: ${r.name}`, meta: `${r.period} · ${r.metrics.join(', ')}`, src: r.screenshot })),
+  results.map((r) => ({ title: `Результат: ${r.name}`, meta: `${r.period} · ${r.metrics.join(', ')}`, src: shot(r.file) })),
 )
 const active = ref<number | null>(null)
 
@@ -130,7 +63,7 @@ section#reviews
           path(d='m15 18-6-6 6-6')
 
       .results__track(ref='track' @scroll.passive='updateEdges')
-        .results__slide(v-for='(r, i) in results' :key='r.screenshot')
+        .results__slide(v-for='(r, i) in results' :key='r.file')
           ResultCard(:result='r' @open='active = i')
 
       button.results__arrow.results__arrow--next(type='button' aria-label='Наступні' :disabled='atEnd' @click='scroll(1)')
@@ -140,7 +73,7 @@ section#reviews
     .results__dots
       button.results__dot(
         v-for='(r, i) in results'
-        :key='r.screenshot'
+        :key='r.file'
         type='button'
         :class="{ 'results__dot--active': i === current }"
         :aria-label="'Відгук ' + (i + 1)"

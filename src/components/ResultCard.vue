@@ -1,13 +1,5 @@
 <script setup lang="ts">
-export interface ClientResult {
-  name: string
-  period: string
-  metrics: string[]
-  request: string
-  quote?: string
-  note?: string
-  screenshot: string
-}
+import type { ClientResult } from '@/content/results'
 
 defineProps<{ result: ClientResult }>()
 defineEmits<{ open: [] }>()

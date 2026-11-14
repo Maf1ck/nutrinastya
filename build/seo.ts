@@ -4,6 +4,7 @@ import type { Plugin } from 'vite'
 import { CONTACTS, OWNER } from '../src/config/site'
 import { BLOG_SEO, HOME_SEO, PAGES, SITE_NAME, type PageSeo } from '../src/config/seo'
 import { FAQ, HERO, SERVICES } from '../src/content/home'
+import { RESULTS } from '../src/content/results'
 import {
   ARTICLE_BY_SLUG,
   ARTICLES_SORTED,
@@ -78,6 +79,13 @@ function homeLd(): string {
     availableLanguage: 'uk',
     priceRange: '400–3000 UAH',
     sameAs: [CONTACTS.instagram, CONTACTS.telegram],
+    // лише справжні цитати зі скриншотів, дослівно як на сторінці; оцінок немає, тому без reviewRating/AggregateRating
+    review: RESULTS.filter((r) => r.quote).map((r) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.name },
+      reviewBody: r.quote,
+      inLanguage: 'uk',
+    })),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Послуги нутриціолога',
