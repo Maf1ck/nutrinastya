@@ -5,7 +5,7 @@ import BlogCard from '@/components/BlogCard.vue'
 import InlineText from '@/components/InlineText.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import ScrollTopButton from '@/components/ScrollTopButton.vue'
-import { ARTICLE_BY_SLUG, formatDate, readingMinutes, relatedArticles } from '@/content/blog'
+import { ARTICLE_BY_SLUG, formatDate, readingMinutes, relatedArticles, sourceOrgs } from '@/content/blog'
 import { articleSeo } from '@/config/seo'
 import { CONTACTS, OWNER } from '@/config/site'
 
@@ -63,6 +63,15 @@ main.container.article(v-if='article')
       details.article-faq__item(v-for='f in article.faq' :key='f.q')
         summary {{ f.q }}
         p {{ f.a }}
+
+    //- звідки цифри: ВООЗ, EFSA
+    section.article-sources(v-if='article.sources?.length' aria-labelledby='article-sources-title')
+      h2#article-sources-title.article-sources__title Джерела
+      p.article-sources__note Цифри й норми в статті — за даними {{ sourceOrgs(article) }}.
+      ol.article-sources__list
+        li(v-for='s in article.sources' :key='s.url')
+          b {{ `${s.org}. ` }}
+          a(:href='s.url' target='_blank' rel='noopener') {{ s.title }}
 
     p.article__disclaimer
       | Стаття має ознайомчий характер і не замінює консультації лікаря. Детальніше — у розділі #[RouterLink(to='/disclaimer') «Відмова від відповідальності»].

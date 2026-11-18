@@ -14,6 +14,7 @@ import {
   parseInline,
   plainText,
   readingMinutes,
+  sourceOrgs,
   type Article,
 } from '../src/content/blog'
 
@@ -155,6 +156,17 @@ function articleLd(a: Article): string {
       author,
       publisher: author,
       isPartOf: { '@type': 'Blog', '@id': BLOG_ID },
+      // джерела цифр і норм (ВООЗ, EFSA)
+      ...(a.sources?.length
+        ? {
+            citation: a.sources.map((x) => ({
+              '@type': 'CreativeWork',
+              name: x.title,
+              url: x.url,
+              publisher: { '@type': 'Organization', name: x.org },
+            })),
+          }
+        : {}),
     },
     ...(a.faq?.length
       ? [
@@ -235,6 +247,12 @@ function articleBody(a: Article): string {
       ? `<section class="article-faq"><h2 class="article-faq__title">Часті питання</h2>${a.faq
           .map((f) => `<details class="article-faq__item"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`)
           .join('')}</section>`
+      : '') +
+    (a.sources?.length
+      ? `<section class="article-sources"><h2 class="article-sources__title">Джерела</h2>` +
+        `<p class="article-sources__note">Цифри й норми в статті — за даними ${esc(sourceOrgs(a))}.</p><ol class="article-sources__list">` +
+        a.sources.map((x) => `<li><b>${esc(x.org)}. </b><a href="${esc(x.url)}" rel="noopener">${esc(x.title)}</a></li>`).join('') +
+        `</ol></section>`
       : '') +
     `<p>Читайте також: ${ARTICLES_SORTED.filter((x) => x.slug !== a.slug)
       .map((x) => `<a href="${articlePath(x.slug)}">${esc(x.title)}</a>`)

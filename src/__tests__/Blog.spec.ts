@@ -17,8 +17,8 @@ async function mountAt(path: string) {
 }
 
 describe('Блог', () => {
-  it('має 12 статей з унікальними slug і SEO-полями', () => {
-    expect(ARTICLES).toHaveLength(12)
+  it('має 18 статей з унікальними slug і SEO-полями', () => {
+    expect(ARTICLES).toHaveLength(18)
     expect(new Set(ARTICLES.map((a) => a.slug)).size).toBe(ARTICLES.length)
     expect(new Set(ARTICLES.map((a) => a.seoTitle)).size).toBe(ARTICLES.length)
     for (const a of ARTICLES) {
@@ -26,6 +26,13 @@ describe('Блог', () => {
       expect(a.seoTitle.length, a.slug).toBeLessThanOrEqual(65)
       expect(a.description.length, a.slug).toBeLessThanOrEqual(170)
     }
+  })
+
+  it('джерела: лише https-посилання, у статтях з нормами є ВООЗ', () => {
+    const sources = ARTICLES.flatMap((a) => a.sources ?? [])
+    expect(sources.every((x) => x.url.startsWith('https://') && x.org && x.title)).toBe(true)
+    const withWho = ARTICLES.filter((a) => a.sources?.some((x) => x.org.startsWith('ВООЗ')))
+    expect(withWho.length).toBeGreaterThanOrEqual(7)
   })
 
   it('кожна стаття потрапляє в PAGES (окремий HTML і sitemap)', () => {
@@ -59,7 +66,7 @@ describe('Блог', () => {
   it('показує всі статті на /blog і фільтрує за категорією', async () => {
     const w = await mountAt('/blog')
     expect(w.find('h1').text()).toBe('Блог нутриціолога')
-    expect(w.findAll('.blog-card')).toHaveLength(12)
+    expect(w.findAll('.blog-card')).toHaveLength(ARTICLES.length)
 
     const chip = w.findAll('.blog-filter__chip').find((b) => b.text() === 'Спорт')!
     await chip.trigger('click')

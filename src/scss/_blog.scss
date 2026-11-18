@@ -575,3 +575,39 @@ $ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     transform: translateY(-6px);
   }
 }
+
+// ---------- джерела статті (ВООЗ, EFSA) ----------
+.article-sources {
+  margin-top: 40px;
+  padding: 20px 24px;
+  border: 1px solid $line;
+  border-radius: 18px;
+  background: $bg-soft;
+
+  &__title {
+    margin-bottom: 6px;
+    color: $text-heading;
+    font-size: 20px;
+  }
+
+  &__note {
+    margin-bottom: 12px;
+    color: $text-muted;
+    font-size: 15px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding-left: 20px;
+    font-size: 15px;
+    line-height: 1.45;
+
+    a {
+      color: $accent;
+      overflow-wrap: anywhere;
+    }
+  }
+}
