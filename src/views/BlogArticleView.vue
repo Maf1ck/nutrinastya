@@ -80,6 +80,8 @@ main.container.article(v-if='article')
     .article-cta__text
       h2.article-cta__title Хочете план харчування саме під вас?
       p Розберемо ваш раціон, звички та цілі на онлайн-консультації — без жорстких дієт і заборон.
+      //- посилання на головну з ключовим словом: для пошуку «нутриціолог» головна важливіша за статті
+      RouterLink.article-cta__home(to='/') Нутриціолог онлайн Анастасія: послуги й ціни →
     a.btn.btn--white.btn--lg(:href='CONTACTS.telegram' target='_blank' rel='noopener') Записатися на консультацію
 
   section.article-related(aria-labelledby='related-title')

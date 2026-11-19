@@ -19,7 +19,7 @@ async function mountAt(path: string) {
 describe('App', () => {
   it('рендерить головну сторінку з усіма секціями', async () => {
     const wrapper = await mountAt('/')
-    expect(wrapper.find('h1').text()).toBe('Харчування без жорстких дієт і зривів')
+    expect(wrapper.find('h1').text()).toBe('Нутриціолог онлайн Харчування без жорстких дієт і зривів')
     for (const id of ['about', 'services', 'quiz', 'reviews', 'contact', 'faq']) {
       expect(wrapper.find(`#${id}`).exists(), `секція #${id}`).toBe(true)
     }

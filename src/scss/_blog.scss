@@ -474,6 +474,20 @@ $ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     flex-shrink: 0;
   }
 
+  &__home {
+    display: inline-block;
+    margin-top: 12px;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover,
+    &:focus-visible {
+      color: $text-on-dark;
+    }
+  }
+
   @media (max-width: 720px) {
     flex-direction: column;
     align-items: stretch;

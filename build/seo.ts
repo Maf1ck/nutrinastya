@@ -254,6 +254,7 @@ function articleBody(a: Article): string {
         a.sources.map((x) => `<li><b>${esc(x.org)}. </b><a href="${esc(x.url)}" rel="noopener">${esc(x.title)}</a></li>`).join('') +
         `</ol></section>`
       : '') +
+    `<p><a href="/">Нутриціолог онлайн Анастасія: послуги й ціни</a></p>` +
     `<p>Читайте також: ${ARTICLES_SORTED.filter((x) => x.slug !== a.slug)
       .map((x) => `<a href="${articlePath(x.slug)}">${esc(x.title)}</a>`)
       .join(', ')}</p>` +
@@ -267,7 +268,7 @@ function homeBody(): string {
   return (
     `<main><section class="section section--soft hero"><div class="hero__inner"><div class="hero__content">` +
     `<div class="hero__badge">${esc(HERO.badge)}</div>` +
-    `<h1 class="hero__title">${esc(HERO.title)}</h1>` +
+    `<h1 class="hero__title"><span class="hero__title-lead">${esc(HERO.titleLead)}</span> ${esc(HERO.title)}</h1>` +
     `<p class="hero__text">${esc(HERO.text)}</p>` +
     `<div class="hero__actions"><a class="btn btn--primary btn--lg" href="${esc(CONTACTS.telegram)}" rel="noopener">${esc(HERO.cta)}</a></div>` +
     `</div></div></section>` +

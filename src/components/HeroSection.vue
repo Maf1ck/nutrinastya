@@ -10,7 +10,8 @@ section.section.section--soft.hero
   .hero__inner
     .hero__content
       .hero__badge {{ HERO.badge }}
-      h1.hero__title {{ HERO.title }}
+      //- «Нутриціолог онлайн» — у H1, щоб головна відповідала на запит «нутриціолог»
+      h1.hero__title #[span.hero__title-lead {{ HERO.titleLead }}] {{ HERO.title }}
       p.hero__text {{ HERO.text }}
       .hero__actions
         a.btn.btn--primary.btn--lg(:href='CONTACTS.telegram' target='_blank' rel='noopener') {{ HERO.cta }}
@@ -61,6 +62,17 @@ section.section.section--soft.hero
     color: $text-heading;
     font-size: clamp(38px, 5vw, 58px);
     line-height: 1.1;
+  }
+
+  &__title-lead {
+    display: block;
+    margin-bottom: 12px;
+    color: $green-link;
+    font-family: $font-body;
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
   }
 
   &__text {
